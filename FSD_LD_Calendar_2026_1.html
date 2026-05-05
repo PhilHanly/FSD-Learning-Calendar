@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FSD Learning & Development Calendar 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --indigo:#4f46e5;--red:#dc2626;--green:#059669;--purple:#7c3aed;--blue:#0ea5e9;--amber:#f59e0b;
+  --bg:#f8f7ff;--surface:#ffffff;--border:#e5e4f0;--text:#1a1833;--muted:#6b6880;--subtle:#9997b0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HERO */
+.hero{background:var(--indigo);padding:52px 40px 44px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0px,rgba(255,255,255,.03) 1px,transparent 1px,transparent 40px);}
+.hero-sub{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1.1;margin-bottom:8px;}
+.hero-title em{font-style:italic;color:#a5b4fc;}
+.hero-year{font-family:'DM Serif Display',serif;font-size:100px;color:rgba(255,255,255,.06);position:absolute;right:30px;bottom:-20px;line-height:1;pointer-events:none;user-select:none;}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 28px;line-height:1.6;}
+.cta-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--indigo);font-size:13px;font-weight:600;padding:11px 22px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s;}
+.btn-primary:hover{opacity:.9;}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:500;padding:11px 22px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,.25);cursor:pointer;transition:background .15s;}
+.btn-secondary:hover{background:rgba(255,255,255,.2);}
+
+/* STATS STRIP */
+.stats-strip{background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:center;gap:0;}
+.stat{padding:20px 36px;text-align:center;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'DM Serif Display',serif;font-size:28px;color:var(--indigo);line-height:1;}
+.stat-l{font-size:11px;color:var(--muted);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;}
+
+/* MAIN LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+
+/* SECTION TITLES */
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--subtle);}
+
+/* CATEGORY LEGEND + FILTERS */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
+.cat-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;}
+.cat-btn .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cat-btn.active,.cat-btn:hover{border-color:currentColor;}
+.cat-btn[data-cat="all"].active{background:var(--text);color:#fff;border-color:var(--text);}
+.cat-btn[data-cat="Mandatory"].active{background:#fef2f2;color:var(--red);border-color:var(--red);}
+.cat-btn[data-cat="Technical"].active{background:#eef2ff;color:var(--indigo);border-color:var(--indigo);}
+.cat-btn[data-cat="Leadership"].active{background:#f0fdf4;color:var(--green);border-color:var(--green);}
+.cat-btn[data-cat="Soft Skills"].active{background:#f5f3ff;color:var(--purple);border-color:var(--purple);}
+.cat-btn[data-cat="Coaching"].active{background:#f0f9ff;color:var(--blue);border-color:var(--blue);}
+
+/* YEAR TIMELINE */
+.timeline{display:grid;grid-template-columns:180px repeat(12,1fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);margin-bottom:40px;font-size:12px;}
+.tl-corner{background:#f5f4fc;padding:10px 14px;font-size:10px;font-weight:600;color:var(--subtle);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;align-items:center;}
+.tl-month{background:#f5f4fc;padding:10px 6px;text-align:center;font-size:10px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px;}
+.tl-month:last-child{border-right:none;}
+.tl-row{display:contents;}
+.tl-label{padding:9px 14px;font-size:12px;color:var(--text);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:8px;}
+.tl-label .cat-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.tl-label span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;font-size:11px;}
+.tl-cell{border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;}
+.tl-cell:last-child{border-right:none;}
+.tl-chip{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:9px;font-weight:700;color:#fff;transition:transform .1s;}
+.tl-chip:hover{transform:scale(1.15);}
+.tl-row:last-child .tl-label,.tl-row:last-child .tl-cell{border-bottom:none;}
+
+/* MONTH CARDS */
+.months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.month-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.month-card-hd{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.month-name{font-size:13px;font-weight:600;color:var(--text);}
+.month-count{font-size:11px;background:#f0effe;color:var(--indigo);padding:3px 8px;border-radius:10px;font-weight:600;}
+.month-events{padding:8px 0;}
+.month-ev{padding:7px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;transition:background .1s;}
+.month-ev:hover{background:#f8f7ff;}
+.ev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.ev-title{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;}
+.ev-cat{font-size:10px;color:var(--muted);}
+
+/* INFOGRAPHIC CARDS */
+.infographics{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px;}
+.infog{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;}
+.infog-bg-num{position:absolute;right:-10px;bottom:-20px;font-family:'DM Serif Display',serif;font-size:96px;opacity:.04;color:var(--text);line-height:1;pointer-events:none;}
+.infog-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;}
+.infog-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--text);margin-bottom:4px;}
+.infog-sub{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:16px;}
+.bar-mini{display:flex;flex-direction:column;gap:8px;}
+.bm-row{display:flex;align-items:center;gap:10px;}
+.bm-label{font-size:11px;color:var(--muted);width:80px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bm-track{flex:1;height:6px;background:#f0effe;border-radius:3px;overflow:hidden;}
+.bm-fill{height:100%;border-radius:3px;}
+.bm-val{font-size:11px;font-weight:600;color:var(--text);width:24px;text-align:right;flex-shrink:0;}
+.donut-row{display:flex;align-items:center;gap:24px;}
+.donut-legend{display:flex;flex-direction:column;gap:8px;}
+.dl-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);}
+.dl-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+.dl-val{font-weight:600;color:var(--text);margin-left:auto;padding-left:12px;}
+.peak-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.peak-cell{background:#f8f7ff;border-radius:8px;padding:10px;text-align:center;}
+.peak-month{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.peak-n{font-family:'DM Serif Display',serif;font-size:22px;color:var(--indigo);}
+.peak-label{font-size:10px;color:var(--muted);}
+.audience-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.aud-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,24,51,.45);z-index:100;align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:28px 32px;max-width:480px;width:90%;position:relative;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer;line-height:1;}
+.modal-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.modal-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--text);margin-bottom:8px;}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+.modal-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.meta-item{background:#f8f7ff;border-radius:8px;padding:10px 12px;}
+.meta-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.meta-val{font-size:13px;font-weight:500;color:var(--text);}
+.modal-months{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.m-chip{padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.modal-btns{display:flex;gap:10px;}
+.modal-btn{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-align:center;}
+.outlook-btn{background:var(--indigo);color:#fff;}
+.outlook-btn:hover{opacity:.9;}
+.share-btn{background:#f5f4fc;color:var(--indigo);}
+.share-btn:hover{background:#eef2ff;}
+
+/* PROMPT CARDS */
+.prompts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px;}
+.prompt-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:border-color .15s;}
+.prompt-card:hover{border-color:var(--indigo);}
+.prompt-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:16px;}
+.prompt-q{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px;line-height:1.4;}
+.prompt-hint{font-size:11px;color:var(--muted);}
+
+/* OUTLOOK SECTION */
+.outlook-section{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:40px;}
+.ol-text{color:#fff;}
+.ol-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;margin-bottom:6px;}
+.ol-sub{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;max-width:400px;}
+.ol-steps{margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+.ol-step{font-size:12px;color:rgba(255,255,255,.7);display:flex;align-items:flex-start;gap:8px;}
+.ol-step-n{background:rgba(255,255,255,.15);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.ol-btns{display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .months-grid,.infographics,.prompts-grid{grid-template-columns:1fr;}
+  .stats-strip{flex-wrap:wrap;}
+  .outlook-section{flex-direction:column;}
+  .timeline{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-sub">Financial Sector Deepening Kenya</div>
+  <h1 class="hero-title">Learning &amp; Development<br><em>Calendar 2026</em></h1>
+  <p class="hero-desc">Your complete guide to all learning offerings this year — from mandatory compliance to flagship leadership programmes.</p>
+  <div class="cta-row">
+    <a class="btn-primary" href="FSD_LD_Calendar_2026.ics" download>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 2v2M11 2v2M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Download calendar (.ics)
+    </a>
+    <a class="btn-secondary" href="mailto:?subject=FSD%20L%26D%20Calendar%202026&body=Please%20find%20the%20FSD%20Learning%20and%20Development%20Calendar%202026%20attached." id="share-email-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+      Share via email
+    </a>
+  </div>
+  <div class="hero-year">2026</div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><div class="stat-n">25</div><div class="stat-l">Learning programmes</div></div>
+  <div class="stat"><div class="stat-n">95</div><div class="stat-l">Scheduled sessions</div></div>
+  <div class="stat"><div class="stat-n">5</div><div class="stat-l">Categories</div></div>
+  <div class="stat"><div class="stat-n">12</div><div class="stat-l">Months of learning</div></div>
+  <div class="stat"><div class="stat-n">All</div><div class="stat-l">Audience levels</div></div>
+</div>
+
+<div class="main">
+
+  <!-- FILTERS -->
+  <div class="section-hd"><span class="section-title">Filter by category</span></div>
+  <div class="filter-bar">
+    <button class="cat-btn active" data-cat="all" onclick="setFilter('all',this)"><span class="dot" style="background:#1a1833;"></span> All programmes</button>
+    <button class="cat-btn" data-cat="Mandatory" onclick="setFilter('Mandatory',this)"><span class="dot" style="background:#dc2626;"></span> Mandatory</button>
+    <button class="cat-btn" data-cat="Technical" onclick="setFilter('Technical',this)"><span class="dot" style="background:#4f46e5;"></span> Technical &amp; Flagship</button>
+    <button class="cat-btn" data-cat="Leadership" onclick="setFilter('Leadership',this)"><span class="dot" style="background:#059669;"></span> Leadership</button>
+    <button class="cat-btn" data-cat="Soft Skills" onclick="setFilter('Soft Skills',this)"><span class="dot" style="background:#7c3aed;"></span> Soft skills</button>
+    <button class="cat-btn" data-cat="Coaching" onclick="setFilter('Coaching',this)"><span class="dot" style="background:#0ea5e9;"></span> Coaching &amp; mentoring</button>
+  </div>
+
+  <!-- YEAR TIMELINE -->
+  <div class="section-hd" style="margin-bottom:14px;"><span class="section-title">Full-year overview</span></div>
+  <div class="timeline" id="timeline"></div>
+
+  <!-- MONTH CARDS -->
+  <div class="section-hd"><span class="section-title">Browse by month</span></div>
+  <div class="months-grid" id="months-grid"></div>
+
+  <!-- INFOGRAPHICS -->
+  <div class="section-hd"><span class="section-title">Programme insights</span></div>
+  <div class="infographics">
+
+    <div class="infog">
+      <div class="infog-label">Sessions by category</div>
+      <div class="infog-title">What's on offer</div>
+      <div class="infog-sub">Total scheduled touchpoints across all programme types in 2026.</div>
+      <div class="bar-mini">
+        <div class="bm-row"><span class="bm-label">Soft skills</span><div class="bm-track"><div class="bm-fill" style="width:100%;background:#7c3aed;"></div></div><span class="bm-val">43</span></div>
+        <div class="bm-row"><span class="bm-label">Technical</span><div class="bm-track"><div class="bm-fill" style="width:77%;background:#4f46e5;"></div></div><span class="bm-val">33</span></div>
+        <div class="bm-row"><span class="bm-label">Coaching</span><div class="bm-track"><div class="bm-fill" style="width:42%;background:#0ea5e9;"></div></div><span class="bm-val">18</span></div>
+        <div class="bm-row"><span class="bm-label">Leadership</span><div class="bm-track"><div class="bm-fill" style="width:23%;background:#059669;"></div></div><span class="bm-val">10</span></div>
+        <div class="bm-row"><span class="bm-label">Mandatory</span><div class="bm-track"><div class="bm-fill" style="width:12%;background:#dc2626;"></div></div><span class="bm-val">5</span></div>
+      </div>
+      <div class="infog-bg-num">95</div>
+    </div>
+
+    <div class="infog">
+      <div class="infog-label">Audience coverage</div>
+      <div class="infog-title">Who this serves</div>
+      <div class="infog-sub">Programmes designed for every level of the organisation.</div>
+      <div class="donut-row">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#f0effe" stroke-width="18"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#4f46e5" stroke-width="18" stroke-dasharray="96 143" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#059669" stroke-width="18" stroke-dasharray="48 191" stroke-dashoffset="-96" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#7c3aed" stroke-width="18" stroke-dasharray="36 203" stroke-dashoffset="-144" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#0ea5e9" stroke-width="18" stroke-dasharray="24 215" stroke-dashoffset="-180" transform="rotate(-90 50 50)"/>
+          <text x="50" y="54" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#1a1833">All</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="dl-item"><div class="dl-swatch" style="background:#4f46e5;"></div> All staff<span class="dl-val">40%</span></div>
+          <div class="dl-item"><div class="dl-swatch" style="background:#059669;"></div> Managers<span class="dl-val">20%</span></div>
+          <div class="dl-item"><div class="dl-swatch" style="background:#7c3aed;"></div> Supervisors<span class="dl-val">15%</span></div>
+          <div class="dl-item"><div class="dl-swatch" style="background:#0ea5e9;"></div> Senior leaders<span class="dl-val">10%</span></div>
+          <div class="dl-item"><div class="dl-swatch" style="background:#f0effe;border:1px solid #e0e0e0;"></div> Specialist<span class="dl-val">15%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="infog">
+      <div class="infog-label">Peak learning months</div>
+      <div class="infog-title">When learning peaks</div>
+      <div class="infog-sub">Number of sessions scheduled per month — Q3 and Q4 are the most intensive.</div>
+      <div class="peak-grid">
+        <div class="peak-cell"><div class="peak-month">Sep</div><div class="peak-n">13</div><div class="peak-label">sessions</div></div>
+        <div class="peak-cell"><div class="peak-month">Oct</div><div class="peak-n">13</div><div class="peak-label">sessions</div></div>
+        <div class="peak-cell"><div class="peak-month">Nov</div><div class="peak-n">10</div><div class="peak-label">sessions</div></div>
+        <div class="peak-cell"><div class="peak-month">Jul</div><div class="peak-n">10</div><div class="peak-label">sessions</div></div>
+      </div>
+    </div>
+
+    <div class="infog">
+      <div class="infog-label">Target audiences</div>
+      <div class="infog-title">Learning for everyone</div>
+      <div class="infog-sub">Programmes are designed to reach every role and level within the organisation.</div>
+      <div class="audience-pills">
+        <span class="aud-pill" style="background:#eef2ff;color:#3730a3;">All staff</span>
+        <span class="aud-pill" style="background:#f0fdf4;color:#166534;">Managers</span>
+        <span class="aud-pill" style="background:#f5f3ff;color:#5b21b6;">Supervisors</span>
+        <span class="aud-pill" style="background:#f0f9ff;color:#075985;">Senior leaders</span>
+        <span class="aud-pill" style="background:#fff7ed;color:#9a3412;">Finance teams</span>
+        <span class="aud-pill" style="background:#fef2f2;color:#991b1b;">Credit teams</span>
+        <span class="aud-pill" style="background:#ecfdf5;color:#065f46;">Women leaders</span>
+        <span class="aud-pill" style="background:#fefce8;color:#854d0e;">Technical staff</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OUTLOOK SECTION -->
+  <div class="outlook-section">
+    <div class="ol-text">
+      <div class="ol-title">Add to Outlook in 3 steps</div>
+      <p class="ol-sub">Subscribe to the full L&D calendar so every session appears automatically in your Outlook calendar with 1-week reminders.</p>
+      <div class="ol-steps">
+        <div class="ol-step"><div class="ol-step-n">1</div> Download the .ics file using the button above or below</div>
+        <div class="ol-step"><div class="ol-step-n">2</div> In Outlook: File ? Open &amp; Export ? Import/Export ? Import an iCalendar (.ics) file</div>
+        <div class="ol-step"><div class="ol-step-n">3</div> Select the downloaded file — all 95 sessions will appear with built-in reminders</div>
+      </div>
+    </div>
+    <div class="ol-btns">
+      <a class="btn-primary" href="FSD_LD_Calendar_2026.ics" download>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 8l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Download .ics file
+      </a>
+      <a class="btn-secondary" href="webcal://localhost/FSD_LD_Calendar_2026.ics">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 2v2M11 2v2M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Open in calendar app
+      </a>
+    </div>
+  </div>
+
+  <!-- AUTOMATED PROMPTS -->
+  <div class="section-hd"><span class="section-title">Automated email prompts — copy &amp; customise</span></div>
+  <div class="prompts-grid" id="prompts-grid"></div>
+
+</div>
+
+<!-- EVENT MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="document.getElementById('overlay').classList.remove('open')">?</button>
+    <div class="modal-cat" id="m-cat"></div>
+    <div class="modal-title" id="m-title"></div>
+    <div class="modal-desc" id="m-desc"></div>
+    <div class="modal-meta">
+      <div class="meta-item"><div class="meta-label">Category</div><div class="meta-val" id="m-category"></div></div>
+      <div class="meta-item"><div class="meta-label">Audience</div><div class="meta-val" id="m-audience"></div></div>
+    </div>
+    <div class="modal-months" id="m-months"></div>
+    <div class="modal-btns">
+      <button class="modal-btn outlook-btn" onclick="downloadICS()">Add to Outlook / calendar</button>
+      <button class="modal-btn share-btn" onclick="shareEvent()">Share this programme</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CAT_COLOR = {
+  "Mandatory":"#dc2626","Technical":"#4f46e5","Leadership":"#059669","Soft Skills":"#7c3aed","Coaching":"#0ea5e9"
+};
+const MONTHS_FULL = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+const MONTHS_SHORT = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+const EVENTS = [
+  {title:"Safeguarding",category:"Mandatory",months:[5],audience:"All staff & Managers",desc:"Deepen understanding of psychological safety, unconscious bias, and communication strategies to resolve professional misunderstandings."},
+  {title:"Cyber Security Awareness",category:"Mandatory",months:[10],audience:"All staff",desc:"Blended learning security awareness: phishing, password hygiene, and safe digital practices for non-technical staff."},
+  {title:"HR Policies & Procedures Sensitisation",category:"Mandatory",months:[7,10,11],audience:"All staff",desc:"Updated HR policy review via e-learning to ensure all staff are sensitised to current policies and procedures."},
+  {title:"AI Knowledge & Literacy",category:"Technical",months:[4,5,6,7,8,9,10],audience:"All staff",desc:"Continuous learning programme building AI concepts, tools, and practical literacy across the organisation."},
+  {title:"Risk Training Across All Pillars",category:"Technical",months:[4,5,6,7,9],audience:"All staff",desc:"Comprehensive risk training covering all organisational risk pillars — continuous throughout the year."},
+  {title:"Digital Assets (Stablecoins, Tokenisation, Securitisation)",category:"Technical",months:[4,8,9],audience:"Technical staff",desc:"Deep dive into digital assets, stablecoins, tokenisation, and securitisation frameworks."},
+  {title:"Market Systems Development Programme",category:"Technical",months:[8,9,10],audience:"Technical staff",desc:"Technical programme covering market systems design and development methodologies."},
+  {title:"Certified Expert in Climate Adaptation Finance",category:"Technical",months:[9,10,11],audience:"Finance & Sustainability teams",desc:"Professional certification in climate adaptation finance methodologies and frameworks."},
+  {title:"Environmental, Social & Governance (ESG)",category:"Technical",months:[8,9],audience:"All staff",desc:"ESG frameworks, reporting standards, and integration into business decision-making."},
+  {title:"Nature & Sustainability",category:"Technical",months:[11],audience:"All staff",desc:"Principles of nature-based solutions and sustainability strategies for development finance."},
+  {title:"Master Credit",category:"Technical",months:[9,10],audience:"Credit & Finance teams",desc:"Advanced credit analysis, structuring, and risk assessment for credit professionals."},
+  {title:"Data & Digital Skills (Excel, Power BI)",category:"Technical",months:[9,10],audience:"All staff",desc:"Excel for data analysis, digital productivity tools, and Power BI dashboard building."},
+  {title:"Management Development Programme",category:"Leadership",months:[8,9,10,11],audience:"Managers",desc:"Flagship programme building core management capabilities, team leadership, and strategic effectiveness."},
+  {title:"Women Leadership Programme",category:"Leadership",months:[6,8,10,11,12],audience:"Women leaders",desc:"Flagship programme supporting women's leadership growth, visibility, and career advancement."},
+  {title:"Management Advancement Series",category:"Leadership",months:[7],audience:"Senior managers",desc:"Advanced leadership series for experienced managers — designed to stretch and accelerate senior talent."},
+  {title:"Proactivity & Procrastination",category:"Soft Skills",months:[4,5,6,7,8,9,10,11,12],audience:"All staff",desc:"Build habits of proactivity, overcome procrastination, and boost personal productivity."},
+  {title:"Emotional Intelligence & Self-Leadership",category:"Soft Skills",months:[7,8],audience:"All staff",desc:"Develop emotional intelligence and self-leadership skills for professional effectiveness."},
+  {title:"Stakeholder & Partnership Management",category:"Soft Skills",months:[6,9],audience:"All staff",desc:"Skills for managing stakeholders, navigating relationships, and building strategic partnerships."},
+  {title:"Time Management",category:"Soft Skills",months:[10,11,12],audience:"All staff",desc:"Tools and strategies for effective time management, prioritisation, and workload balance."},
+  {title:"Communication & Presentation Skills (Toastmasters)",category:"Soft Skills",months:[1,2,5,6,9,10],audience:"All staff",desc:"Public speaking and presentation skills through Toastmasters Club sessions."},
+  {title:"Performance Management Upskilling",category:"Soft Skills",months:[12],audience:"Managers & HR",desc:"Upskilling on performance management frameworks, feedback conversations, and review cycles."},
+  {title:"Lead the Way — Supervisory Series",category:"Soft Skills",months:[4,5,6,7,8,9,10,11,12],audience:"Supervisors",desc:"Monthly supervisory skills series covering core leadership competencies for people managers."},
+  {title:"Executive Coaching for Senior Leaders",category:"Coaching",months:[6,7,8,9,10],audience:"Senior & Executive leaders",desc:"One-to-one executive coaching engagements supporting senior and executive leaders."},
+  {title:"Coaching for Managers",category:"Coaching",months:[4,5,6,7,8,9,10,11,12],audience:"Managers",desc:"Building coaching capability in managers to support their team's performance and growth throughout the year."},
+  {title:"Mentorship Programme",category:"Coaching",months:[7,8,9,10,11,12],audience:"All staff",desc:"Structured mentorship pairing staff with experienced mentors across the organisation."},
+];
+
+const PROMPTS = [
+  {icon:"?",bg:"#eef2ff",color:"#4f46e5",title:"4-week launch announcement",hint:"Send organisation-wide",subject:"Your 2026 L&D Journey Starts Now ?",body:`Dear Team,\n\nWe're excited to share the FSD Learning & Development Calendar for 2026 — your guide to all the programmes, workshops, and development opportunities available to you this year.\n\nFrom technical deep-dives in AI and Digital Assets to leadership development, coaching, and soft skills — there is something for every role and ambition.\n\n? Download the calendar to your Outlook: [attach .ics file]\n? View the full interactive calendar: [link]\n\nLook out for registration details for each programme as the dates approach.\n\nBest regards,\nThe Learning & Development Team`},
+  {icon:"?",bg:"#f0fdf4",color:"#059669",title:"1-week session reminder",hint:"Automated per event",subject:"Reminder: [Programme Name] is next week — confirm your place",body:`Dear [Name],\n\nThis is a friendly reminder that [Programme Name] is scheduled for next week.\n\n? Date: [Date]\n? Duration: [X] hours\n? Audience: [Target audience]\n\nIf you haven't already registered, please do so by [deadline] to secure your place.\n\nWhat you'll gain:\n• [Learning outcome 1]\n• [Learning outcome 2]\n• [Learning outcome 3]\n\nFor questions, contact the L&D team at ld@fsdkenya.org.\n\nBest regards,\nThe Learning & Development Team`},
+  {icon:"?",bg:"#f5f3ff",color:"#7c3aed",title:"Post-session follow-up",hint:"Sent 24h after each session",subject:"Thank you for attending — your next steps from [Programme Name]",body:`Dear [Name],\n\nThank you for participating in [Programme Name].\n\nWe hope the session was valuable. Here's a quick recap of what was covered:\n\n• [Key topic 1]\n• [Key topic 2]\n• [Key topic 3]\n\n? Action items to try this week:\n1. [Suggested action 1]\n2. [Suggested action 2]\n\n? Please complete our 2-minute feedback survey: [link]\n\nYour next recommended programme: [Related programme] — scheduled for [Month].\n\nKeep learning!\nThe Learning & Development Team`},
+  {icon:"?",bg:"#fff7ed",color:"#c2410c",title:"Monthly L&D digest",hint:"First Monday of each month",subject:"L&D Monthly Digest — [Month] 2026",body:`Dear Team,\n\nHere's what's coming up in L&D this month:\n\n? MANDATORY\n[List mandatory sessions]\n\n? TECHNICAL\n[List technical sessions]\n\n? LEADERSHIP\n[List leadership sessions]\n\n? SOFT SKILLS\n[List soft skills sessions]\n\n? COACHING & MENTORING\n[List coaching sessions]\n\n? Add all sessions to your calendar: [attach .ics]\n\nRegistration links will be shared 2 weeks before each session.\n\nBest regards,\nThe Learning & Development Team`},
+  {icon:"?",bg:"#f0f9ff",color:"#0369a1",title:"New joiner welcome",hint:"Triggered on onboarding",subject:"Welcome to FSD — your learning journey starts here",body:`Dear [Name],\n\nWelcome to FSD Kenya! As part of your onboarding, we want to introduce you to all the learning and development opportunities available to you.\n\nThis year's L&D calendar includes 25 programmes across 5 categories:\n\n? Mandatory: Safeguarding, Cyber Security, HR Policies\n? Technical: AI Literacy, Risk Training, Digital Assets, ESG & more\n? Leadership: Management Development, Women's Leadership Programme\n? Soft Skills: Communication, Time Management, Supervisory Series\n? Coaching: Executive Coaching, Coaching for Managers, Mentorship\n\n? Download the 2026 L&D Calendar to Outlook: [attach .ics]\n\nYour line manager will guide you on which programmes are recommended for your role.\n\nExcited to have you with us!\nThe Learning & Development Team`},
+  {icon:"?",bg:"#fef2f2",color:"#991b1b",title:"Mandatory course alert",hint:"30 days before deadline",subject:"Action required: [Mandatory Course] completion due [Date]",body:`Dear [Name],\n\nThis is an important reminder that [Mandatory Course Name] is a required training for all staff and must be completed by [Date].\n\n? Course: [Course Name]\n? Session date: [Date]\n? Duration: [X] hours\n? Register here: [link]\n\nCompletion is tracked and reported to senior management. Please ensure you attend or complete the e-learning module before the deadline.\n\nIf you have any questions, contact: ld@fsdkenya.org\n\nBest regards,\nThe Learning & Development Team`},
+];
+
+let currentFilter = 'all';
+let selectedEvent = null;
+
+function getFiltered() {
+  return currentFilter === 'all' ? EVENTS : EVENTS.filter(e => e.category === currentFilter);
+}
+
+function setFilter(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTimeline();
+  renderMonths();
+}
+
+function renderTimeline() {
+  const evs = getFiltered();
+  let html = '';
+  html += '<div class="tl-corner">Programme</div>';
+  for(let m=1;m<=12;m++) html += `<div class="tl-month">${MONTHS_SHORT[m]}</div>`;
+  evs.forEach((ev,i) => {
+    html += `<div class="tl-row">`;
+    html += `<div class="tl-label"><span class="cat-dot" style="background:${CAT_COLOR[ev.category]};"></span><span title="${ev.title}">${ev.title}</span></div>`;
+    for(let m=1;m<=12;m++) {
+      if(ev.months.includes(m)) {
+        html += `<div class="tl-cell"><div class="tl-chip" style="background:${CAT_COLOR[ev.category]};" onclick='openModal(${i})' title="${ev.title} — ${MONTHS_FULL[m]}">?</div></div>`;
+      } else {
+        html += '<div class="tl-cell"></div>';
+      }
+    }
+    html += '</div>';
+  });
+  document.getElementById('timeline').innerHTML = html;
+}
+
+function renderMonths() {
+  const evs = getFiltered();
+  const allMonths = [];
+  for(let m=1;m<=12;m++) {
+    const monthEvs = evs.filter(e => e.months.includes(m));
+    allMonths.push({m, evs: monthEvs});
+  }
+  let html = '';
+  allMonths.forEach(({m, evs: mes}) => {
+    html += `<div class="month-card"><div class="month-card-hd"><span class="month-name">${MONTHS_FULL[m]}</span><span class="month-count">${mes.length}</span></div><div class="month-events">`;
+    if(mes.length === 0) {
+      html += `<div style="padding:12px 16px;font-size:12px;color:var(--subtle);">No sessions this month</div>`;
+    } else {
+      mes.forEach((ev,i) => {
+        const globalIdx = EVENTS.indexOf(ev);
+        html += `<div class="month-ev" onclick="openModal(${globalIdx})">
+          <span class="ev-dot" style="background:${CAT_COLOR[ev.category]};"></span>
+          <span class="ev-title" title="${ev.title}">${ev.title}</span>
+          <span class="ev-cat">${ev.category}</span>
+        </div>`;
+      });
+    }
+    html += '</div></div>';
+  });
+  document.getElementById('months-grid').innerHTML = html;
+}
+
+function renderPrompts() {
+  let html = '';
+  PROMPTS.forEach((p,i) => {
+    html += `<div class="prompt-card" onclick="openPrompt(${i})">
+      <div class="prompt-icon" style="background:${p.bg};">${p.icon}</div>
+      <div class="prompt-q">${p.title}</div>
+      <div class="prompt-hint">${p.hint}</div>
+    </div>`;
+  });
+  document.getElementById('prompts-grid').innerHTML = html;
+}
+
+function openModal(idx) {
+  selectedEvent = EVENTS[idx];
+  const ev = selectedEvent;
+  document.getElementById('m-cat').textContent = ev.category;
+  document.getElementById('m-cat').style.color = CAT_COLOR[ev.category];
+  document.getElementById('m-title').textContent = ev.title;
+  document.getElementById('m-desc').textContent = ev.desc;
+  document.getElementById('m-category').textContent = ev.category;
+  document.getElementById('m-audience').textContent = ev.audience;
+  const mHtml = ev.months.map(m => `<span class="m-chip" style="background:${CAT_COLOR[ev.category]}18;color:${CAT_COLOR[ev.category]};">${MONTHS_FULL[m]}</span>`).join('');
+  document.getElementById('m-months').innerHTML = mHtml;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if(e.target.id === 'overlay') document.getElementById('overlay').classList.remove('open');
+}
+
+function downloadICS() {
+  window.location.href = 'FSD_LD_Calendar_2026.ics';
+}
+
+function shareEvent() {
+  if(!selectedEvent) return;
+  const sub = encodeURIComponent(`FSD L&D: ${selectedEvent.title}`);
+  const body = encodeURIComponent(`Hi,\n\nI wanted to flag this L&D opportunity:\n\n${selectedEvent.title}\nCategory: ${selectedEvent.category}\nAudience: ${selectedEvent.audience}\nMonths: ${selectedEvent.months.map(m=>MONTHS_FULL[m]).join(', ')}\n\n${selectedEvent.desc}\n\nFor the full calendar, download the .ics file from the L&D team.`);
+  window.location.href = `mailto:?subject=${sub}&body=${body}`;
+}
+
+function openPrompt(i) {
+  const p = PROMPTS[i];
+  const sub = encodeURIComponent(p.subject);
+  const body = encodeURIComponent(p.body);
+  window.location.href = `mailto:?subject=${sub}&body=${body}`;
+}
+
+renderTimeline();
+renderMonths();
+renderPrompts();
+</script>
+</body>
+</html>
